@@ -1,0 +1,5 @@
+appname = beego-bbs
+httpport = 8080
+runmode = dev
+
+mysqlConn = user:passwd@tcp(127.0.0.1:3306)/test?charset=utf8mb4

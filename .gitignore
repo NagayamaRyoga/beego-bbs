@@ -1,4 +1,6 @@
 *.exe
+beego-bbs
+
+conf/app.conf
 
 .vscode
-beego-bbs

@@ -26,6 +26,7 @@
         <p class="form__error">{{ $err }}</p>
         {{ end }}
 
+        {{ .xsrfdata }}
         <button class="form__button" type="submit">投稿</button>
       </form>
       <p>{{.Error}}</p>

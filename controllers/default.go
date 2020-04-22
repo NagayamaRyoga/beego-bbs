@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"html/template"
+
 	"github.com/NagayamaRyoga/beego-bbs/models"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/validation"
@@ -23,6 +25,7 @@ func (c *MainController) Get() {
 
 	c.Data["Posts"] = posts
 	c.Data["Error"] = err
+	c.Data["xsrfdata"] = template.HTML(c.XSRFFormHTML())
 	c.TplName = "index.tpl"
 }
 
@@ -58,5 +61,7 @@ func (c *MainController) Post() {
 	c.Data["Posts"] = posts
 	c.Data["Error"] = err
 	c.Data["ValidationErrors"] = validation.ErrorsMap
+	c.Data["xsrfdata"] = template.HTML(c.XSRFFormHTML())
 	c.TplName = "index.tpl"
+	post.CreatedAt.Local()
 }

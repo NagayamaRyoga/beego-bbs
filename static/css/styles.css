@@ -53,6 +53,14 @@ body {
   border: solid 1px #68d2ff;
   border-radius: 0.25em;
 }
+.form__error {
+  margin: 0.5em 0;
+  padding: 0.25em 1em;
+  color: #fab3ae;
+  border: solid 1px #f44336;
+  border-radius: 0.5em;
+  font-size: 0.8em;
+}
 
 .posts__item {
   margin: 1rem 0rem;
@@ -63,6 +71,9 @@ body {
 .posts__item-header {
   font-size: 1.2rem;
   font-weight: bolder;
+}
+.posts__item-text {
+  word-wrap: break-word;
 }
 .posts__item-footer {
   color: #d0d0d0;

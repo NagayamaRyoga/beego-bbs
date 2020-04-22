@@ -16,8 +16,16 @@
     </header>
     <main class="main">
       <form class="form" action="/" method="POST">
-        <input class="form__input" name="author" type="text" placeholder="名前">
-        <textarea class="form__textarea" name="body" placeholder="本文"></textarea>
+        <input class="form__input" name="author" type="text" placeholder="名前" value="{{ .Author }}" required minlength="1" maxlength="128">
+        {{ range $err := .ValidationErrors.Author }}
+        <p class="form__error">{{ $err }}</p>
+        {{ end }}
+
+        <textarea class="form__textarea" name="body" placeholder="コメント" required minlength="1" maxlength="1024">{{ .Body }}</textarea>
+        {{ range $err := .ValidationErrors.Body }}
+        <p class="form__error">{{ $err }}</p>
+        {{ end }}
+
         <button class="form__button" type="submit">投稿</button>
       </form>
       <p>{{.Error}}</p>
@@ -29,7 +37,7 @@
             <span class="posts__item-author">{{ $post.Author }}</span>
           </div>
           <div class="posts__item-body">
-            <p>{{ $post.Body }}</p>
+            <p class="posts__item-text">{{ $post.Body }}</p>
           </div>
           <div class="posts__item-footer">
             <span class="posts__item-datetime">{{ $post.CreatedAt }}</span>

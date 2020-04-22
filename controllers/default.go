@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/NagayamaRyoga/beego-bbs/models"
 	"github.com/astaxie/beego"
 )
 
@@ -9,7 +10,6 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	c.Data["Website"] = "beego.me"
-	c.Data["Email"] = "astaxie@gmail.com"
+	c.Data["Posts"], c.Data["Error"] = models.GetAllPost(nil, nil, []string{"id"}, []string{"desc"}, 0, 0)
 	c.TplName = "index.tpl"
 }

@@ -11,7 +11,7 @@ import (
 )
 
 type Post struct {
-	ID        int64     `orm:"auto"`
+	ID        int64     `orm:"auto;column(id)"`
 	Author    string    `orm:"size(128)"`
 	Body      string    `orm:"type(longtext)"`
 	CreatedAt time.Time `orm:"type(datetime);auto_now_add"`

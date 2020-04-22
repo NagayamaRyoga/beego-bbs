@@ -10,6 +10,7 @@ func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
 
 	mysqlConn := beego.AppConfig.String("mysqlConn")
+
 	if err := orm.RegisterDataBase("default", "mysql", mysqlConn); err != nil {
 		panic(err)
 	}

@@ -18,6 +18,9 @@ type MainController struct {
 func (c *MainController) Get() {
 	// すべての投稿を取得する
 	posts, err := models.GetAll(-1, 0)
+	if err != nil {
+		c.Abort("500")
+	}
 
 	// フォームの初期値を設定する
 	c.Data["Author"] = ""
@@ -35,28 +38,30 @@ func (c *MainController) Get() {
 // @router	/	[post]
 func (c *MainController) Post() {
 	var post models.Post
-	_ = c.ParseForm(&post)
+	if err := c.ParseForm(&post); err != nil {
+		c.Abort("500")
+	}
 
 	// リクエストのバリデーションを行う
 	validation := validation.Validation{}
-	isValid, _ := validation.Valid(&post)
+	if isValid, err := validation.Valid(&post); !isValid || err != nil {
+		c.Abort("400")
+	}
 
 	// 投稿を追加する
-	if isValid {
-		_, _ = models.Add(&post)
+	if _, err := models.Add(&post); err != nil {
+		c.Abort("500")
 	}
 
 	// すべての投稿を取得する
 	posts, err := models.GetAll(-1, 0)
+	if err != nil {
+		c.Abort("500")
+	}
 
 	// フォームの初期値を設定する
-	if isValid {
-		c.Data["Author"] = post.Author
-		c.Data["Body"] = ""
-	} else {
-		c.Data["Author"] = post.Author
-		c.Data["Body"] = post.Body
-	}
+	c.Data["Author"] = post.Author
+	c.Data["Body"] = ""
 
 	c.Data["Posts"] = posts
 	c.Data["Error"] = err

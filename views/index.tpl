@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BBS</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/reload.min.js"></script>
   </head>
   <body>
     <header>
